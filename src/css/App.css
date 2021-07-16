@@ -1,12 +1,13 @@
 .App {
     background-position: fixed;
     background: url(https://wallpaperaccess.com/full/3097725.jpg) no-repeat center center fixed;
+    min-height: 100vh;
     background-size: cover;
 }
 
 .App__mobile {
     background-position: fixed;
-    background: url(https://wallpapercave.com/wp/wp6060071.jpg) repeat center center fixed;
+    background: url(https://wallpaperaccess.com/full/3097725.jpg) no-repeat center center fixed;
     min-height: 100vh;
-    background-size: contain;
+    background-size: cover;
 }
