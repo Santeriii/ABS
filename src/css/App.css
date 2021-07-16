@@ -1,0 +1,6 @@
+.App {
+    background-position: fixed;
+    background: url(https://wallpaperaccess.com/full/3097725.jpg) no-repeat center center fixed;
+    min-height: 100vh;
+    background-size: cover;
+}
