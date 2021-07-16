@@ -1,5 +1,11 @@
 .App {
     background-position: fixed;
-    background: url(https://wallpaperaccess.com/full/3097725.jpg) repeat center center fixed;
+    background: url(https://wallpaperaccess.com/full/3097725.jpg) no-repeat center center fixed;
     background-size: cover;
+}
+
+.App__mobile {
+    background-position: fixed;
+    background: url(https://wallpaperaccess.com/full/3097725.jpg) repeat center center fixed;
+    background-size: contain;
 }
