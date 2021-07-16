@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import '../css/Grid.css';
 import useWindowDimensions from '../tools/WindowDimensions';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { changeAnimeId } from '../reducers/animeIdReducer'
 import { Link } from 'react-router-dom'
 
@@ -36,15 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GridItem(props) {
     const classes = useStyles();
-    const { height, width } = useWindowDimensions();
+    const { width } = useWindowDimensions();
     const [fontSize, setFontSize] = useState(0.9);
     const dispatch = useDispatch()
-    const animeId = useSelector(state => state.animeId)
 
     useEffect(() => {
         width > 1400 && setFontSize(1)
         width > 2000 && setFontSize(1.3)
-    }, [])
+    }, [width])
 
     function checkWidthForRating() {
         if (width < 1400) {

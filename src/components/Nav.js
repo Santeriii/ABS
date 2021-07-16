@@ -6,16 +6,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { changeSearchTerm } from '../reducers/animeReducer'
 import {
     BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    MobileView
   } from "react-device-detect";
 import { Link } from 'react-router-dom'
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     searchField: {
@@ -78,9 +75,7 @@ function Nav() {
     const [show, handleShow] = useState(false);
     const classes = useStyles();
     const dispatch = useDispatch()
-    const searchTerm = useSelector(state => state.searchTerm)
     const [localSearchTerm, setLocalSearchTerm] = useState('')
-    const history = useHistory();
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -99,12 +94,6 @@ function Nav() {
     
     const handleLocalSearchTermChange = (event) => {
         setLocalSearchTerm(event.target.value)
-    }
-
-    function handleEnpoint(endpoint) {
-        setTimeout(() => {
-            history.push(endpoint);
-        }, 100);
     }
 
     return (

@@ -2,9 +2,7 @@ import React from "react";
 import "../css/YoutubeEmbed.css";
 import {
     BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    MobileView
   } from "react-device-detect";
 
 const YoutubeEmbed = ({ url }) => (

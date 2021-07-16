@@ -5,14 +5,11 @@ import GridItem from './GridItem';
 import animeService from '../services/animes'
 import {
     BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    MobileView
   } from "react-device-detect";
   import useWindowDimensions from '../tools/WindowDimensions';
   import GridItemMobile from './GridItemMobile';
-  import { useDispatch, useSelector } from 'react-redux'
-import { changeSearchTerm } from '../reducers/animeReducer'
+  import { useSelector } from 'react-redux'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NestedGrid() {
   const classes = useStyles();
   const [oneAnime, setOneAnime] = useState([])
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const searchTerm = useSelector(state => state.searchTerm)
 
   useEffect(() => {
@@ -39,10 +36,10 @@ export default function NestedGrid() {
             setOneAnime(response.top)
         })
     console.log(oneAnime)
-  }, [])
+  }, [oneAnime])
 
   useEffect(() => {
-      if (searchTerm.length == 0) {
+      if (searchTerm.length === 0) {
         animeService
         .getTopByPages(1)
         .then(response => {

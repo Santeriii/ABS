@@ -6,9 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {
     BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    MobileView
 } from "react-device-detect";
 import useWindowDimensions from '../tools/WindowDimensions';
 import { useSelector } from 'react-redux'
@@ -17,7 +15,6 @@ import MAL_logo from '../images/MAL_logo.jpg'
 import YoutubeEmbed from './YoutubeEmbed';
 import Rating from '@material-ui/lab/Rating';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Details() {
     const classes = useStyles();
-    const { height, width } = useWindowDimensions();
+    const { width } = useWindowDimensions();
     const animeId = useSelector(state => state.animeId)
     const [anime, setAnime] = useState('')
     const history = useHistory();
@@ -78,7 +75,7 @@ export default function Details() {
               setAnime(response)
               console.log(anime)
           })
-    }, [])
+    }, [anime, animeId])
 
     function checkWidthForWidth() {
         if (width > 2000) {
@@ -139,7 +136,7 @@ export default function Details() {
                     />  
                 </Typography>
                 </Grid>
-                {anime.trailer_url != undefined ?
+                {anime.trailer_url !== undefined ?
                     <YoutubeEmbed url={anime.trailer_url} />
                     :
                     null
@@ -187,7 +184,7 @@ export default function Details() {
                     Status: {anime.status}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                        {anime.trailer_url != undefined ?
+                        {anime.trailer_url !== undefined ?
                         <YoutubeEmbed url={anime.trailer_url} />
                         :
                         null

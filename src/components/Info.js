@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import {
     BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    MobileView
 } from "react-device-detect";
 import useWindowDimensions from '../tools/WindowDimensions';
-import { useSelector } from 'react-redux'
-import animeService from '../services/animes';
-import ABS_logo from '../images/abs_logo-removebg-preview.png'
-import YoutubeEmbed from './YoutubeEmbed';
-import Rating from '@material-ui/lab/Rating';
-import { BackgroundColor } from 'jest-matcher-utils/node_modules/chalk';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 
 
@@ -70,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Info() {
     const classes = useStyles();
-    const { height, width } = useWindowDimensions();
+    const { width } = useWindowDimensions();
     const history = useHistory();
 
     function checkWidthForWidth() {

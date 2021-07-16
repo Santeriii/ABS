@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,7 +6,6 @@ import Rating from '@material-ui/lab/Rating';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import '../css/Grid.css';
-import useWindowDimensions from '../tools/WindowDimensions';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { changeAnimeId } from '../reducers/animeIdReducer'
@@ -37,12 +36,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GridItem(props) {
     const classes = useStyles();
-    const { height, width } = useWindowDimensions();
-    const [fontSize, setFontSize] = useState(1);
+    const [fontSize] = useState(1);
     console.log(props.stars)
     const dispatch = useDispatch()
     const animeId = useSelector(state => state.animeId)
-    const [to, setTo] = useState('')
     const history = useHistory();
 
     function setAnimeId(id) {

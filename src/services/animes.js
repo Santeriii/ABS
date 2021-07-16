@@ -37,4 +37,8 @@ const searchByName = name => {
     }
 }
 
-export default { getById, getTopByPages, searchByName }
+const exportAll = {
+    getById, getTopByPages, searchByName
+}
+
+export default exportAll
