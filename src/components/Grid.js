@@ -36,7 +36,7 @@ export default function NestedGrid() {
             setOneAnime(response.top)
         })
     console.log(oneAnime)
-  }, [oneAnime])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
       if (searchTerm.length === 0) {
