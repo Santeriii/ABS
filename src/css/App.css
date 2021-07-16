@@ -10,5 +10,5 @@
     background: url(https://wallpapercave.com/wp/wp6060071.jpg) repeat center center fixed;
     min-height: 100vh;
     background-size: contain;
-    background-attachment: fixed;
+    position: static,
 }
