@@ -12,7 +12,7 @@ import {
     BrowserView,
     MobileView
   } from "react-device-detect";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     searchField: {
@@ -76,6 +76,7 @@ function Nav() {
     const classes = useStyles();
     const dispatch = useDispatch()
     const [localSearchTerm, setLocalSearchTerm] = useState('')
+    const location = useLocation();
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -90,6 +91,11 @@ function Nav() {
 
     const handleSearchValueChange = () => {
         dispatch(changeSearchTerm(localSearchTerm))
+        setLocalSearchTerm('')
+    }
+
+    const resetSearchTerm = () => {
+        dispatch(changeSearchTerm(''))
     }
     
     const handleLocalSearchTermChange = (event) => {
@@ -105,28 +111,34 @@ function Nav() {
                             className="nav__logo"
                             src={logo}
                             alt="AnimeBySeason Logo"
+                            onClick={resetSearchTerm}
                         />
                     </Link>
-                    <TextField 
-                        className={classes.searchField}
-                        id="outlined-search"
-                        label="Search field"
-                        type="search"
-                        variant="outlined"
-                        onChange={handleLocalSearchTermChange}
-                        onKeyPress={event => {
-                            if (event.key === 'Enter') {
-                                handleSearchValueChange()
-                            }
-                          }}
-                        InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <SearchIcon style={{ color: 'white' }}/>
-                              </InputAdornment>
-                            ),
-                          }}
-                    />
+                    {location.pathname === "/" ?
+                        <TextField 
+                            className={classes.searchField}
+                            id="outlined-search"
+                            label="Search field"
+                            type="search"
+                            variant="outlined"
+                            onChange={handleLocalSearchTermChange}
+                            value={localSearchTerm}
+                            onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    handleSearchValueChange()
+                                }
+                            }}
+                            InputProps={{
+                                startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon style={{ color: 'white', cursor: 'pointer' }} onClick={handleSearchValueChange}/>
+                                </InputAdornment>
+                                ),
+                            }}
+                        />
+                        :
+                        null
+                    }
                     <Link to="/info">
                         <InfoIcon
                             className={classes.infoIcon}
@@ -135,32 +147,47 @@ function Nav() {
                 </div>
             </BrowserView>
             <MobileView>
-                <div className={`nav__mobile ${show && "nav__black"}`}>
+                <div className={location.pathname === "/" ?
+                    `nav__mobile ${show && "nav__black"}`
+                    :
+                    `nav__mobile__compact ${show && "nav__black"}`
+                }>
                     <Link className={classes.logoContainer} to="/">
                         <img
                             className={classes.navLogoMobile}
                             src={logo}
                             alt="AnimeBySeason Logo"
+                            onClick={resetSearchTerm}
                         />
                         </Link>
-                     <TextField 
-                        className={classes.searchFieldMobile}
-                        id="outlined-search2"
-                        label="Search field"
-                        type="search"
-                        variant="outlined"
-                        onChange={handleLocalSearchTermChange}
-                        InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <SearchIcon
-                                    className={classes.searchIconMobile}
-                                    onClick={handleSearchValueChange}
-                                />
-                              </InputAdornment>
-                            ),
-                          }}
-                    />
+                    {location.pathname === "/" ?
+                        <TextField 
+                            className={classes.searchFieldMobile}
+                            id="outlined-search2"
+                            label="Search field"
+                            type="search"
+                            variant="outlined"
+                            onChange={handleLocalSearchTermChange}
+                            value={localSearchTerm}
+                            onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    handleSearchValueChange()
+                                }
+                            }}
+                            InputProps={{
+                                endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchIcon
+                                        className={classes.searchIconMobile}
+                                        onClick={handleSearchValueChange}
+                                    />
+                                </InputAdornment>
+                                ),
+                            }}
+                        />
+                        :
+                        null
+                    }
                     <Link to="/info">
                         <InfoIcon
                             className={classes.infoIcon_mobile}

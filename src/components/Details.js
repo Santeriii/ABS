@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     detailsMobile: {
         flexGrow: 1,
-        paddingTop: '9.25rem',
+        paddingTop: '5.25rem',
         paddingBottom: '0.5rem',
     },
     title: {
