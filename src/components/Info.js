@@ -90,9 +90,24 @@ export default function Info() {
                             <Typography gutterBottom variant="subtitle1" className={classes.title} >
                                 Work in progress!!
                             </Typography>
+                            <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '15%', fontSize: '1.4rem' }} >
+                                About
+                            </Typography>
                             <div style={{ width: '70%', marginLeft: '15%' }}>
+                            <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
+                                    Welcome to AnimeBySeason, a quick and easy-to-use rating app for a vast anime collection provided by MyAnimeList. No signing, nothing futile.
+                                </Typography><br />
+                                <Typography gutterBottom variant="subtitle1" style={{ fontSize: '1.1rem' }} >
+                                    Review System:
+                                </Typography>
                                 <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
-                                    Quick and easy-to-use rating service for a vast anime collection provided by MyAnimeList. No signing, nothing futile.
+                                    The site's aim is to provide an anime reviewing system as simple as possible, which means it's not based on user registration or complicated scoring system; each series/movie has its' own 1-5 star rating, nothing else.
+                                </Typography><br />
+                                <Typography gutterBottom variant="subtitle1" style={{ fontSize: '1.1rem' }} >
+                                    To come:
+                                </Typography>
+                                <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
+                                    Thumbs up-/neutral-/thumbs down -feedback for each season of each series
                                 </Typography>
                             </div>
                         </Grid>
@@ -111,9 +126,24 @@ export default function Info() {
                             <Typography gutterBottom variant="subtitle1" className={classes.title} >
                                 Work in progress!!
                             </Typography>
+                            <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '7.5%', fontSize: '1.4rem' }} >
+                                About
+                            </Typography>
                             <div style={{ width: '85%', marginLeft: '7.5%' }}>
                                 <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
-                                    Quick and easy-to-use rating app for a vast anime collection provided by MyAnimeList. No signing, nothing futile.
+                                    Welcome to AnimeBySeason, a quick and easy-to-use rating app for a vast anime collection provided by MyAnimeList. No signing, nothing futile.
+                                </Typography>
+                                <Typography gutterBottom variant="subtitle1" style={{ fontSize: '1.1rem' }} >
+                                    Review System:
+                                </Typography>
+                                <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
+                                    The site's aim is to provide an anime reviewing system as simple as possible, which means it's not based on user registration or complicated scoring system; each series/movie has its' own 1-5 star rating, nothing else.
+                                </Typography>
+                                <Typography gutterBottom variant="subtitle1" style={{ fontSize: '1.1rem' }} >
+                                    To come:
+                                </Typography>
+                                <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
+                                    Thumbs up-/neutral-/thumbs down -feedback for each season of each series
                                 </Typography>
                             </div>
                         </Grid>
