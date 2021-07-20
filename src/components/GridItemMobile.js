@@ -47,16 +47,6 @@ export default function GridItem(props) {
         console.log(animeId)
     }
 
-    function checkFontSize(anime) {
-        if (anime.title.length > 50) {
-            return 0.70
-        }
-        if (anime.title.length > 20) {
-            return 0.85
-        }
-        return 1.1
-    }
-
     function handleEndpoint() {
         setAnimeId(props.id)
         setTimeout(() => {
@@ -77,7 +67,7 @@ export default function GridItem(props) {
                     <img className={classes.img} alt="complex" src={props.imgUrl} />
                 </ButtonBase>
                 <div style={{ float: 'left', textAlign: 'left', maxWidth: '60%' }}>
-                    <Typography gutterBottom variant="subtitle1" style={{ cursor: 'pointer', fontSize: `${fontSize * 1.2 * checkFontSize(props)}rem` }}>
+                    <Typography gutterBottom variant="subtitle1" style={{ cursor: 'pointer', fontSize: `${fontSize * 1.2 * 0.85}rem` }}>
                         {props.title}
                     </Typography>
                     <Typography gutterBottom variant="subtitle1" >

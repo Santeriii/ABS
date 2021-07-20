@@ -86,33 +86,48 @@ export default function NestedGrid() {
                                         <Grid item xs={4}>
                                         <GridItem
                                             imgUrl={oneAnime[i * 3].image_url}
-                                            title={oneAnime[i * 3].title}
+                                            title={
+                                              oneAnime[i * 3].title.length < 35 ?
+                                                oneAnime[i * 3].title
+                                              :
+                                                `${oneAnime[i * 3].title.substring(0, 35)}...`
+                                            }
                                             score={oneAnime[i * 3].score}
                                             seasons={oneAnime[i * 3].episodes}
                                             stars={Math.round(oneAnime[i * 3].score / 2)}
-                                            fontSize={checkFontSize(oneAnime[i * 3])}
+                                            fontSize={0.85}
                                             id={oneAnime[i * 3].mal_id}
                                         />
                                         </Grid>
                                         <Grid item xs={4}>
                                         <GridItem
                                             imgUrl={oneAnime[1 + i * 3].image_url}
-                                            title={oneAnime[1 + i * 3].title}
+                                            title={
+                                              oneAnime[1 + i * 3].title.length < 35 ?
+                                                oneAnime[1 + i * 3].title
+                                              :
+                                                `${oneAnime[1 + i * 3].title.substring(0, 35)}...`
+                                            }
                                             score={oneAnime[1 + i * 3].score}
                                             seasons={oneAnime[1 + i * 3].episodes}
                                             stars={Math.round(oneAnime[1 + i * 3].score / 2)}
-                                            fontSize={checkFontSize(oneAnime[1 + i * 3])}
+                                            fontSize={0.85}
                                             id={oneAnime[1 + i * 3].mal_id}
                                         />
                                         </Grid>
                                         <Grid item xs={4}>
                                         <GridItem
                                             imgUrl={oneAnime[2 + i * 3].image_url}
-                                            title={oneAnime[2 + i * 3].title}
+                                            title={
+                                              oneAnime[2 + i * 3].title.length < 35 ?
+                                                oneAnime[2 + i * 3].title
+                                              :
+                                                `${oneAnime[2 + i * 3].title.substring(0, 35)}...`
+                                            }
                                             score={oneAnime[2 + i * 3].score}
                                             seasons={oneAnime[2 + i * 3].episodes}
                                             stars={Math.round(oneAnime[2 + i * 3].score / 2)}
-                                            fontSize={checkFontSize(oneAnime[2 + i * 3])}
+                                            fontSize={0.85}
                                             id={oneAnime[2 + i * 3].mal_id}
                                         />
                                         </Grid>
@@ -136,7 +151,12 @@ export default function NestedGrid() {
             <Grid item xs={12} style={{ paddingBottom: '0.5rem' }}>
                 <GridItemMobile
                     imgUrl={anime.image_url}
-                    title={anime.title}
+                    title={
+                      anime.title.length < 45 ?
+                        anime.title
+                      :
+                        `${anime.title.substring(0,30)}...`
+                      }
                     seasons={anime.episodes}
                     stars={Math.round(anime.score / 2)}
                     fontSize={checkFontSize(anime)}
