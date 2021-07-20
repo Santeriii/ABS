@@ -47,8 +47,17 @@ const getAllRatings = () => {
     }
 }
 
+const postRating = (req) => {
+    try {
+        const res = axios.post(`https://salty-fjord-05650.herokuapp.com/api/ratings`, req)
+        return res
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 const exportAll = {
-    getById, getTopByPages, searchByName, getAllRatings
+    getById, getTopByPages, searchByName, getAllRatings, postRating
 }
 
 export default exportAll

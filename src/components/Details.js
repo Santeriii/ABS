@@ -106,6 +106,8 @@ export default function Details() {
     const [anime, setAnime] = useState('')
     const history = useHistory();
     const [showRatingFeedback, setShowRatingFeedback] = useState(false)
+    const [sum, setSum] = useState(0)
+    const [ratingCount, setRatingCount] = useState(0)
 
     useEffect(() => {
         animeService
@@ -113,6 +115,22 @@ export default function Details() {
           .then(response => {
               setAnime(response)
               console.log(anime)
+          })
+        animeService
+          .getAllRatings()
+          .then(response => {
+              let res = response
+              let sum = 0
+              let ratCount = 0
+              res.map(rating => {
+                if (rating.mal_id === anime.mal_id) {
+                    sum = sum + rating.rating
+                    ratCount = ratCount + 1
+                }
+                return console.log('map return')
+              })
+              setSum(sum)
+              setRatingCount(ratCount)
           })
     }, [anime, animeId])
 
@@ -132,7 +150,35 @@ export default function Details() {
         }, 100);
     }
 
-    function rate() {
+    function rate(event) {
+        const toBeRated = {
+            mal_id: anime.mal_id,
+            rating: parseInt(event.target.value)
+        }
+
+        if (!isNaN(toBeRated.rating))
+            animeService
+                .postRating(toBeRated)
+                .then(response => {
+                    console.log(response)
+                })
+            animeService
+            .getAllRatings()
+            .then(response => {
+                let res = response
+                let sum = 0
+                let ratCount = 0
+                res.map(rating => {
+                    if (rating.mal_id === anime.mal_id) {
+                        sum = sum + rating.rating
+                        ratCount = ratCount + 1
+                    }
+                    return console.log('map return')
+                })
+                setSum(sum)
+                setRatingCount(ratCount)
+            })
+
         setShowRatingFeedback(true)
         setTimeout(() => {
             setShowRatingFeedback(false)
@@ -262,12 +308,17 @@ export default function Details() {
                         alt="ABS Logo"
                     />{' '}
                     <Rating
-                        name="simple-controlled"
-                        value={0}
+                        name="mobile-simple-controlled"
+                        value={
+                            ratingCount > 0 ?
+                                sum / ratingCount
+                                :
+                                0
+                            }
                         onClick={rate}
                         style={{ borderStyle: 'inset' }}
                     />{' '}
-                    (0)
+                    ({ratingCount})
                 </Typography>
                     <Typography variant="body2" gutterBottom>
                     {anime.synopsis}
