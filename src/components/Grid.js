@@ -75,7 +75,7 @@ export default function NestedGrid() {
       return '6.5rem'
   }
 
-  function FormGrid({ animes }) {
+  function FormGrid() {
         return <div>
             {
                 oneAnime.length > 0 ?
