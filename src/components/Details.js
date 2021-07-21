@@ -161,28 +161,15 @@ export default function Details() {
             rating: parseInt(event.target.value)
         }
 
-        if (!isNaN(toBeRated.rating))
+        if (!isNaN(toBeRated.rating)) {
             animeService
                 .postRating(toBeRated)
                 .then(response => {
                     console.log(response)
                 })
-            animeService
-            .getAllRatings()
-            .then(response => {
-                let res = response
-                let sum = 0
-                let ratCount = 0
-                res.map(rating => {
-                    if (rating.mal_id === anime.mal_id) {
-                        sum = sum + rating.rating
-                        ratCount = ratCount + 1
-                    }
-                    return console.log('map return')
-                })
-                setSum(sum)
-                setRatingCount(ratCount)
-            })
+            setSum(sum + toBeRated.rating)
+            setRatingCount(ratingCount + 1)
+        }
 
         setShowRatingFeedback(true)
         setTimeout(() => {
@@ -232,27 +219,34 @@ export default function Details() {
                         {' '}
                         ({anime.scored_by})
                         <br />
-                        <img
-                            className={classes.malLogo}
-                            src={ABS_logo_small}
-                            alt="ABS Logo"
-                        />{' '}
-                        {ratingsFetched ?
-                            <Rating
-                                name="desktop-simple-controlled"
-                                value={
-                                    ratingCount > 0 ?
-                                        sum / ratingCount
-                                        :
-                                        0
-                                    }
-                                onClick={rate}
-                                style={{ borderStyle: 'inset' }}
-                            />
+                        {ratingsFetched === true ?
+                            <div>
+                                <img
+                                    className={classes.malLogo}
+                                    src={ABS_logo_small}
+                                    alt="ABS Logo"
+                                />{' '}
+                                <Rating
+                                    name="mobile-simple-controlled"
+                                    value={
+                                        ratingCount > 0 ?
+                                            sum / ratingCount
+                                            :
+                                            0
+                                        }
+                                    onClick={rate}
+                                    style={{ borderStyle: 'inset' }}
+                                /> ({ratingCount})
+                            </div>
                                 :
-                            `loading...`
-                                }
-                        ({ratingCount})
+                            <div>
+                                <img
+                                    className={classes.malLogo}
+                                    src={ABS_logo_small}
+                                    alt="ABS Logo"
+                                /> loading...
+                            </div>
+                        }
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
                     <img
@@ -316,27 +310,34 @@ export default function Details() {
                     />{' '}
                     ({anime.scored_by})
                     <br />
-                    <img
-                        className={classes.malLogo}
-                        src={ABS_logo_small}
-                        alt="ABS Logo"
-                    />{' '}
                     {ratingsFetched === true ?
-                        <Rating
-                            name="mobile-simple-controlled"
-                            value={
-                                ratingCount > 0 ?
-                                    sum / ratingCount
-                                    :
-                                    0
-                                }
-                            onClick={rate}
-                            style={{ borderStyle: 'inset' }}
-                        />
+                        <div>
+                            <img
+                                className={classes.malLogo}
+                                src={ABS_logo_small}
+                                alt="ABS Logo"
+                            />{' '}
+                            <Rating
+                                name="mobile-simple-controlled"
+                                value={
+                                    ratingCount > 0 ?
+                                        sum / ratingCount
+                                        :
+                                        0
+                                    }
+                                onClick={rate}
+                                style={{ borderStyle: 'inset' }}
+                            /> ({ratingCount})
+                        </div>
                             :
-                        `loading...`
-                            }
-                    ({ratingCount})
+                        <div>
+                            <img
+                                className={classes.malLogo}
+                                src={ABS_logo_small}
+                                alt="ABS Logo"
+                            /> loading...
+                        </div>
+                    }
                 </Typography>
                     <Typography variant="body2" gutterBottom>
                     {anime.synopsis}
