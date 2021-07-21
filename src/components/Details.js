@@ -116,6 +116,9 @@ export default function Details() {
               setAnime(response)
               console.log(anime)
           })
+    }, [animeId]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
         animeService
           .getAllRatings()
           .then(response => {
@@ -132,7 +135,7 @@ export default function Details() {
               setSum(sum)
               setRatingCount(ratCount)
           })
-    }, [anime, animeId])
+    }, [anime])
 
     function checkWidthForWidth() {
         if (width > 2000) {
@@ -232,13 +235,22 @@ export default function Details() {
                             src={ABS_logo_small}
                             alt="ABS Logo"
                         />{' '}
-                        <Rating
-                            name="simple-controlled"
-                            value={0}
-                            onClick={rate}
-                            style={{ borderStyle: 'inset' }}
-                        />{' '}
-                        (0)
+                        {ratingCount > 0 ?
+                            <Rating
+                                name="desktop-simple-controlled"
+                                value={
+                                    ratingCount > 0 ?
+                                        sum / ratingCount
+                                        :
+                                        0
+                                    }
+                                onClick={rate}
+                                style={{ borderStyle: 'inset' }}
+                            />
+                                :
+                            `loading...`
+                                }
+                        ({ratingCount})
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
                     <img
@@ -307,17 +319,21 @@ export default function Details() {
                         src={ABS_logo_small}
                         alt="ABS Logo"
                     />{' '}
-                    <Rating
-                        name="mobile-simple-controlled"
-                        value={
-                            ratingCount > 0 ?
-                                sum / ratingCount
-                                :
-                                0
+                    {ratingCount > 0 ?
+                        <Rating
+                            name="mobile-simple-controlled"
+                            value={
+                                ratingCount > 0 ?
+                                    sum / ratingCount
+                                    :
+                                    0
+                                }
+                            onClick={rate}
+                            style={{ borderStyle: 'inset' }}
+                        />
+                            :
+                        `loading...`
                             }
-                        onClick={rate}
-                        style={{ borderStyle: 'inset' }}
-                    />{' '}
                     ({ratingCount})
                 </Typography>
                     <Typography variant="body2" gutterBottom>
