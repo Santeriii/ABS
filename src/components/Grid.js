@@ -15,7 +15,8 @@ import {
 const useStyles = makeStyles((theme) => ({
   grid: {
     flexGrow: 1,
-    paddingTop: '4.5rem'
+    paddingTop: '4.5rem',
+    paddingBottom: '1rem',
   },
   gridMobile: {
       flexGrow: 1,
