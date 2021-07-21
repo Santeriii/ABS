@@ -146,7 +146,7 @@ export default function NestedGrid() {
       return <div>
         {
             oneAnime.length > 0 ?
-            oneAnime.slice(0, 15).map(anime => (
+            oneAnime.slice(0, 20).map(anime => (
           <React.Fragment>
             <Grid item xs={12} style={{ paddingBottom: '0.5rem' }}>
                 <GridItemMobile
