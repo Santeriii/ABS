@@ -61,6 +61,17 @@ const useStyles = makeStyles((theme) => ({
             zIndex: 1,
         },
     },
+    arrowBack_desktop: {
+        color: 'black',
+        paddingRight: '0.2rem',
+        '&:active': {
+            transform: 'scale(1.9)',
+            zIndex: 1,
+        },
+        position: 'absolute',
+        top: '120%',
+        transform: 'scale(1.3)',
+    },
     ratingFeedback: {
         position: 'fixed',
         color: 'green',
@@ -192,7 +203,8 @@ export default function Details() {
             <Grid container spacing={2}>
             <Grid item>
                 <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="complex" src={anime.image_url} />
+                    <ArrowBackIcon className={classes.arrowBack_desktop} onClick={handleEnpoint} />
+                    <img className={classes.img} alt="complex" src={anime.image_url} />
                 </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>
