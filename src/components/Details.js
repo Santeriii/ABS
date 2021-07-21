@@ -172,28 +172,6 @@ export default function Details() {
         setRatingValue(event.target.value)
     }
 
-    function rate(event) {
-        const toBeRated = {
-            mal_id: anime.mal_id,
-            rating: parseInt(event.target.value)
-        }
-
-        if (!isNaN(toBeRated.rating)) {
-            animeService
-                .postRating(toBeRated)
-                .then(response => {
-                    console.log(response)
-                })
-            setSum(sum + toBeRated.rating)
-            setRatingCount(ratingCount + 1)
-        }
-
-        setShowRatingFeedback(true)
-        setTimeout(() => {
-            setShowRatingFeedback(false)
-        }, 5000)
-    }
-
     function rateMobile() {
         const toBeRated = {
             mal_id: anime.mal_id,
@@ -223,7 +201,7 @@ export default function Details() {
         {showRatingFeedback ?
             <div className={classes.ratingFeedback} >
                 <CheckCircleOutlineIcon style={{ color: 'green', marginRight: '1rem', fontSize: '1.5rem', transform: 'scale(1.4)' }} />
-                Feedback registered
+                Feedback registered ({showRatingFeedback})
             </div>
             :
             null
@@ -256,28 +234,38 @@ export default function Details() {
                         <Rating
                             name="simple-controlled"
                             value={Math.round(anime.score / 2)}
+                            readOnly
                         />  
                         {' '}
                         ({anime.scored_by})
                         <br />
                         {ratingsFetched === true ?
-                            <div>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <img
                                     className={classes.malLogo}
                                     src={ABS_logo_small}
                                     alt="ABS Logo"
+                                    style={{ paddingRight: '0.4rem' }}
                                 />{' '}
                                 <Rating
-                                    name="mobile-simple-controlled"
+                                    name="desktop-simple-controlled"
                                     value={
                                         ratingCount > 0 ?
-                                            sum / ratingCount
+                                            ratingValue === 0 ?
+                                                sum / ratingCount
+                                                :
+                                                ratingValue
                                             :
-                                            0
+                                            ratingValue !== 0 ?
+                                                    ratingValue
+                                                :
+                                                    0
                                         }
-                                    onClick={rate}
-                                    style={{ borderStyle: 'inset' }}
-                                /> ({ratingCount})
+                                    onClick={handleRatingValueChange}
+                                    style={{ borderStyle: 'inset', borderWidth: '0.3rem', borderRadius: '0.6rem' }}
+                                /> <Button variant="contained" onClick={rateMobile} style={{ transform: 'scale(0.8)' }}>
+                                    Submit
+                                </Button> ({ratingCount})
                             </div>
                                 :
                             <div>
@@ -348,6 +336,7 @@ export default function Details() {
                     <Rating
                         name="simple-controlled"
                         value={Math.round(anime.score / 2)}
+                        readOnly
                     />{' '}
                     ({anime.scored_by})
                     <br />
