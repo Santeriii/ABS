@@ -88,9 +88,10 @@ export default function GridItem(props) {
             <Grid item>
               <Typography variant="subtitle1">
                 <Rating
-                    name="simple-controlled"
+                    name="read-only"
                     value={props.stars}
                     style={{ fontSize: checkWidthForRating() }}
+                    readOnly
                 />  
                 </Typography>
             </Grid>
