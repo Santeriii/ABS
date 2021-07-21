@@ -108,6 +108,7 @@ export default function Details() {
     const [showRatingFeedback, setShowRatingFeedback] = useState(false)
     const [sum, setSum] = useState(0)
     const [ratingCount, setRatingCount] = useState(0)
+    const [ratingsFetched, setRatingsFetched] = useState(false)
 
     useEffect(() => {
         animeService
@@ -134,6 +135,7 @@ export default function Details() {
               })
               setSum(sum)
               setRatingCount(ratCount)
+              setRatingsFetched(true)
           })
     }, [anime])
 
@@ -235,7 +237,7 @@ export default function Details() {
                             src={ABS_logo_small}
                             alt="ABS Logo"
                         />{' '}
-                        {ratingCount > 0 ?
+                        {ratingsFetched ?
                             <Rating
                                 name="desktop-simple-controlled"
                                 value={
@@ -319,7 +321,7 @@ export default function Details() {
                         src={ABS_logo_small}
                         alt="ABS Logo"
                     />{' '}
-                    {ratingCount > 0 ?
+                    {ratingsFetched === true ?
                         <Rating
                             name="mobile-simple-controlled"
                             value={
