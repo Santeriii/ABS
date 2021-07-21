@@ -18,6 +18,7 @@ import Rating from '@material-ui/lab/Rating';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     details: {
@@ -120,6 +121,7 @@ export default function Details() {
     const [sum, setSum] = useState(0)
     const [ratingCount, setRatingCount] = useState(0)
     const [ratingsFetched, setRatingsFetched] = useState(false)
+    const [ratingValue, setRatingValue] = useState(0)
 
     useEffect(() => {
         animeService
@@ -166,6 +168,10 @@ export default function Details() {
         }, 100);
     }
 
+    function handleRatingValueChange(event) {
+        setRatingValue(event.target.value)
+    }
+
     function rate(event) {
         const toBeRated = {
             mal_id: anime.mal_id,
@@ -183,6 +189,29 @@ export default function Details() {
         }
 
         setShowRatingFeedback(true)
+        setTimeout(() => {
+            setShowRatingFeedback(false)
+        }, 5000)
+    }
+
+    function rateMobile() {
+        const toBeRated = {
+            mal_id: anime.mal_id,
+            rating: parseInt(ratingValue)
+        }
+
+        if (!isNaN(toBeRated.rating)) {
+            animeService
+                .postRating(toBeRated)
+                .then(response => {
+                    console.log(response)
+                })
+            setSum(sum + toBeRated.rating)
+            setRatingCount(ratingCount + 1)
+        }
+
+        setShowRatingFeedback(toBeRated.rating)
+        setRatingValue(0)
         setTimeout(() => {
             setShowRatingFeedback(false)
         }, 5000)
@@ -289,7 +318,7 @@ export default function Details() {
             {showRatingFeedback ?
                 <div className={classes.ratingFeedback_mobile}>
                     <CheckCircleOutlineIcon style={{ color: 'green', marginRight: '1rem', fontSize: '1.5rem', transform: 'scale(1.4)' }} />
-                    Feedback registered
+                    Feedback registered ({showRatingFeedback})
                 </div>
                 :
                 null
@@ -323,23 +352,32 @@ export default function Details() {
                     ({anime.scored_by})
                     <br />
                     {ratingsFetched === true ?
-                        <div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
                             <img
                                 className={classes.malLogo}
                                 src={ABS_logo_small}
                                 alt="ABS Logo"
+                                style={{ paddingRight: '0.3rem' }}
                             />{' '}
                             <Rating
                                 name="mobile-simple-controlled"
                                 value={
                                     ratingCount > 0 ?
-                                        sum / ratingCount
+                                        ratingValue === 0 ?
+                                            sum / ratingCount
+                                            :
+                                            ratingValue
                                         :
-                                        0
+                                        ratingValue !== 0 ?
+                                                ratingValue
+                                            :
+                                                0
                                     }
-                                onClick={rate}
-                                style={{ borderStyle: 'inset' }}
-                            /> ({ratingCount})
+                                onClick={handleRatingValueChange}
+                                style={{ borderStyle: 'inset', borderWidth: '0.3rem', borderRadius: '0.6rem' }}
+                            /> <Button variant="contained" onClick={rateMobile} style={{ transform: 'scale(0.8)' }}>
+                                Submit
+                            </Button> ({ratingCount})
                         </div>
                             :
                         <div>
