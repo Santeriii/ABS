@@ -56,6 +56,11 @@ export default function GridItem(props) {
     }
 
     return (
+        <Link
+          onClick={() => setAnimeId(props.id)}
+          to="/details"
+          style={{ textDecoration: 'none' }}
+        >
         <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
@@ -98,5 +103,6 @@ export default function GridItem(props) {
           </Grid>
         </Grid>
       </Paper>
+      </Link>
 )
     }
