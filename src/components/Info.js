@@ -57,6 +57,19 @@ const useStyles = makeStyles((theme) => ({
             zIndex: 1,
         },
     },
+    arrowBack_desktop: {
+        marginTop: '1rem',
+        marginLeft: '1rem',
+        verticalAlign: 'top',
+        color: 'black',
+        position: 'absolute',
+        '&:active': {
+            transform: 'scale(1.9)',
+            zIndex: 1,
+        },
+        transform: 'scale(1.3)',
+        cursor: 'pointer',
+    },
 }));
 
 export default function Info() {
@@ -88,6 +101,7 @@ export default function Info() {
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
+                            <ArrowBackIcon className={classes.arrowBack_desktop} onClick={handleEnpoint}/>
                             <Typography gutterBottom variant="subtitle1" className={classes.title} >
                                 Work in progress!!
                             </Typography>
