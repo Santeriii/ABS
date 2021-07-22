@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     details: {
         flexGrow: 1,
         paddingTop: '5.5rem',
+        paddingBottom: '1rem',
     },
     detailsMobile: {
         flexGrow: 1,
@@ -210,8 +211,8 @@ export default function Details() {
             <Grid container spacing={2}>
             <Grid item>
                 <ButtonBase className={classes.image}>
-                    <ArrowBackIcon className={classes.arrowBack_desktop} onClick={handleEnpoint} />
-                    <img className={classes.img} alt="complex" src={anime.image_url} />
+                    <ArrowBackIcon className={classes.arrowBack_desktop} onClick={handleEnpoint} style={{ top: width > 2000 && 0, left: width > 2000 && 0 }} />
+                    <img className={classes.img} alt="complex" src={anime.image_url} style={{ paddingLeft: width > 2000 && '5rem' }} />
                 </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>
@@ -293,7 +294,7 @@ export default function Details() {
                 </Grid>
                 <Grid item>
                 </Grid>
-                {anime.trailer_url !== undefined ?
+                {anime.trailer_url !== null ?
                     <YoutubeEmbed url={anime.trailer_url} />
                     :
                     null
@@ -394,10 +395,10 @@ export default function Details() {
                     Status: {anime.status}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                        {anime.trailer_url !== undefined ?
-                        <YoutubeEmbed url={anime.trailer_url} />
-                        :
-                        null
+                        {anime.trailer_url !== null ?
+                            <YoutubeEmbed url={anime.trailer_url} />
+                            :
+                            null
                         }
                     </Typography>
                 </Grid>
