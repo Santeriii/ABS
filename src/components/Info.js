@@ -10,6 +10,7 @@ import {
 import useWindowDimensions from '../tools/WindowDimensions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router-dom';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -124,6 +125,9 @@ export default function Info() {
                                 <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
                                     Thumbs up-/neutral-/thumbs down -feedback for each season of each series
                                 </Typography>
+                                <Typography gutterBottom variant="subtitle1" style={{ marginTop: '2rem', marginBottom: '1rem', fontSize: '1.1rem' }} >
+                                    <GitHubIcon style={{ marginRight: '1.3rem', transform: 'scale(1.3)' }}/>Santeriii
+                                </Typography>
                             </div>
                         </Grid>
                         </Grid>
@@ -159,6 +163,9 @@ export default function Info() {
                                 </Typography>
                                 <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
                                     Thumbs up-/neutral-/thumbs down -feedback for each season of each series
+                                </Typography>
+                                <Typography gutterBottom variant="subtitle1" style={{ marginTop: '1.7rem', marginBottom: '1rem', fontSize: '1.1rem' }} >
+                                    <GitHubIcon style={{ marginRight: '1rem', transform: 'scale(1.3)' }}/>Santeriii
                                 </Typography>
                             </div>
                         </Grid>
