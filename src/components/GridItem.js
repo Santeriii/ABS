@@ -31,7 +31,13 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '100%',
       maxHeight: '100%',
     },
-  
+    title: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      display: '-webkit-box',
+      '-webkit-line-clamp': '3', /* number of lines to show */
+      '-webkit-box-orient': 'vertical',
+   }
 }));
 
 export default function GridItem(props) {
@@ -71,7 +77,7 @@ export default function GridItem(props) {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography gutterBottom variant="subtitle1" style={{ cursor: 'pointer', fontSize: `${fontSize * 1.2 * props.fontSize}rem` }}>
+                <Typography gutterBottom variant="subtitle1" className={classes.title} style={{ cursor: 'pointer', fontSize: `${fontSize * 1.2 * props.fontSize}rem` }}>
                     {props.title.length < 70 ?
                         props.title
                     :
