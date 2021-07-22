@@ -19,6 +19,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
 import Button from '@material-ui/core/Button';
+import RatingBar from './RatingBars'
 
 const useStyles = makeStyles((theme) => ({
     details: {
@@ -277,6 +278,7 @@ export default function Details() {
                                 /> loading...
                             </div>
                         }
+                        <RatingBar seasons={anime.opening_themes} />
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
                     <img
@@ -378,6 +380,7 @@ export default function Details() {
                             /> loading...
                         </div>
                     }
+                    <RatingBar seasons={anime.opening_themes} />
                 </Typography>
                     <Typography variant="body2" gutterBottom>
                     {anime.synopsis}
