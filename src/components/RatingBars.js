@@ -56,7 +56,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function RatingBars({ seasons }) {
+export default function RatingBars({ seasons, seasonRatings, mal_id }) {
   const classes = useStyles();
   const [showSeasonRating, setShowSeasonRating] = useState(false)
 
@@ -68,8 +68,13 @@ export default function RatingBars({ seasons }) {
     <div className={classes.root}>
         {showSeasonRating ?
             <div>
+              {console.log(seasonRatings)}
                 {seasons.map((season, index) => {
-                    return <RatingBar index={index + 1} />
+                    return <RatingBar index={index + 1} ratings={
+                      seasonRatings.filter(seasonRating => {
+                        return seasonRating.season === index + 1
+                      })
+                    } mal_id={mal_id}/>
                 })}
                 <Button variant="contained" onClick={handleShowSeasonRating} style={{ transform: 'scale(0.8)' }}>Hide seasons</Button>
             </div>
