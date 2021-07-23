@@ -124,6 +124,7 @@ export default function Details() {
     const [ratingCount, setRatingCount] = useState(0)
     const [ratingsFetched, setRatingsFetched] = useState(false)
     const [ratingValue, setRatingValue] = useState(0)
+    const [seasonRatings, setSeasonRatings] = useState([])
 
     useEffect(() => {
         animeService
@@ -131,6 +132,11 @@ export default function Details() {
           .then(response => {
               setAnime(response)
               console.log(anime)
+          })
+        animeService
+          .getAllSeasonRatings()
+          .then(response => {
+              setSeasonRatings(response)
           })
     }, [animeId]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -278,7 +284,9 @@ export default function Details() {
                                 /> loading...
                             </div>
                         }
-                        <RatingBar seasons={anime.opening_themes} />
+                        <RatingBar seasons={anime.opening_themes} seasonRatings={seasonRatings.filter(seasonRating => {
+                            return seasonRating.mal_id === anime.mal_id
+                        })} mal_id={anime.mal_id}/>
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
                     <img
@@ -380,7 +388,9 @@ export default function Details() {
                             /> loading...
                         </div>
                     }
-                    <RatingBar seasons={anime.opening_themes} />
+                    <RatingBar seasons={anime.opening_themes} seasonRatings={seasonRatings.filter(seasonRating => {
+                            return seasonRating.mal_id === anime.mal_id
+                        })} mal_id={anime.mal_id}/>
                 </Typography>
                     <Typography variant="body2" gutterBottom>
                     {anime.synopsis}

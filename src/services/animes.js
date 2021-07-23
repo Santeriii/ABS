@@ -56,8 +56,28 @@ const postRating = (req) => {
     }
 }
 
+const getAllSeasonRatings = () => {
+    try {
+        const request = axios.get(`https://salty-fjord-05650.herokuapp.com/api/seasonRatings`)
+        return request.then(response => {
+            return response.data
+        })
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const postSeasonRating = (req) => {
+    try {
+        const res = axios.post(`https://salty-fjord-05650.herokuapp.com/api/seasonRatings`, req)
+        return res
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 const exportAll = {
-    getById, getTopByPages, searchByName, getAllRatings, postRating
+    getById, getTopByPages, searchByName, getAllRatings, postRating, getAllSeasonRatings, postSeasonRating
 }
 
 export default exportAll

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import animeService from '../services/animes'
 
 function LinearProgressWithLabel(props) {
   return (
@@ -42,6 +43,7 @@ const useStyles = makeStyles({
   },
   thumbDownIcon: {
     marginLeft: '1rem',
+    marginRight: '1rem',
     cursor: 'pointer',
     '&:active': {
         transform: 'scale(1.4)',
@@ -51,23 +53,51 @@ const useStyles = makeStyles({
   }
 });
 
-export default function RatingBar({ ratings, index }) {
+export default function RatingBar({ ratings, index, mal_id }) {
   const classes = useStyles();
   const [rating, setRating] = useState(50);
+  const [thisRatings, setThisRatings] = useState(ratings)
+
+  useEffect(() => {
+    let sum = 0
+    thisRatings.map(rating => {
+      return sum = sum + rating.rating
+    })
+    setRating(sum / 2 / thisRatings.length * 100)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    let sum = 0
+    thisRatings.map(rating => {
+      return sum = sum + rating.rating
+    })
+    setRating(sum / 2 / thisRatings.length * 100)
+  }, [rate]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleThumbUp() {
-      if (rating <= 90) {
-          setRating(rating + 10)
-      }
+      rate(2)
+  }
+
+  function rate(rating) {
+    const toBeRated = {
+      mal_id: mal_id,
+      season: index,
+      rating: rating
+    }
+
+    setThisRatings(thisRatings.concat(toBeRated))
+
+    animeService.postSeasonRating(toBeRated)
+      .then(response => {
+        console.log(response)
+      })
   }
 
   function handleThumbDown() {
-        if (rating >= 10) {
-            setRating(rating - 10)
-        }
+        rate(0)
     }
 
   return (
-    <div>S{index}<ThumbUpIcon onClick={handleThumbUp} className={classes.thumbUpIcon}/><ThumbDownIcon onClick={handleThumbDown} className={classes.thumbDownIcon}/> <LinearProgressWithLabel value={rating} /></div>
+    <div>S{index}<ThumbUpIcon onClick={handleThumbUp} className={classes.thumbUpIcon}/><ThumbDownIcon onClick={handleThumbDown} className={classes.thumbDownIcon}/>({thisRatings.length})<LinearProgressWithLabel value={rating || 50} /></div>
   );
 }
