@@ -32,6 +32,13 @@ LinearProgressWithLabel.propTypes = {
 };
 
 const useStyles = makeStyles({
+  thumbUp: {
+    marginLeft: '1rem',
+  },
+  thumbDown: {
+    marginLeft: '1rem',
+    marginRight: '1rem',
+  },
   thumbUpIcon: {
     marginLeft: '1rem',
     cursor: 'pointer',
@@ -40,6 +47,11 @@ const useStyles = makeStyles({
         zIndex: 1,
         color: 'green',
     },
+  },
+  thumbUpRated: {
+    marginLeft: '1rem',
+    zIndex: 1,
+    color: 'green',
   },
   thumbDownIcon: {
     marginLeft: '1rem',
@@ -50,6 +62,12 @@ const useStyles = makeStyles({
         zIndex: 1,
         color: 'red',
     },
+  },
+  thumbDownRated: {
+    marginLeft: '1rem',
+    marginRight: '1rem',
+    zIndex: 1,
+    color: 'red',
   }
 });
 
@@ -57,6 +75,7 @@ export default function RatingBar({ ratings, index, mal_id }) {
   const classes = useStyles();
   const [rating, setRating] = useState(50);
   const [thisRatings, setThisRatings] = useState(ratings)
+  const [rated, setRated] = useState(null)
 
   useEffect(() => {
     let sum = 0
@@ -65,6 +84,10 @@ export default function RatingBar({ ratings, index, mal_id }) {
     })
     setRating(sum / 2 / thisRatings.length * 100)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setRated(window.localStorage.getItem(`${mal_id}, S${index}`))
+  }, [rating]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     let sum = 0
@@ -76,6 +99,8 @@ export default function RatingBar({ ratings, index, mal_id }) {
 
   function handleThumbUp() {
       rate(2)
+      window.localStorage.setItem(`${mal_id}, S${index}`, 'up')
+      setRated('up')
   }
 
   function rate(rating) {
@@ -95,9 +120,11 @@ export default function RatingBar({ ratings, index, mal_id }) {
 
   function handleThumbDown() {
         rate(0)
+        window.localStorage.setItem(`${mal_id}, S${index}`, 'down')
+        setRated('down')
     }
 
   return (
-    <div>S{index}<ThumbUpIcon onClick={handleThumbUp} className={classes.thumbUpIcon}/><ThumbDownIcon onClick={handleThumbDown} className={classes.thumbDownIcon}/>({thisRatings.length})<LinearProgressWithLabel value={rating || 50} /></div>
+    <div>S{index}<ThumbUpIcon onClick={rated === null ? handleThumbUp : null} className={rated !== null ? (rated === 'up' ? classes.thumbUpRated : classes.thumbUp) : classes.thumbUpIcon }/><ThumbDownIcon onClick={rated === null ? handleThumbDown : null} className={rated !== null ? (rated === 'down' ? classes.thumbDownRated : classes.thumbDown) : classes.thumbDownIcon }/>({thisRatings.length})<LinearProgressWithLabel value={rating || 50} /></div>
   );
 }
