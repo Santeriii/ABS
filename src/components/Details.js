@@ -20,6 +20,7 @@ import { useHistory } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
 import Button from '@material-ui/core/Button';
 import RatingBar from './RatingBars'
+import CheckIcon from '@material-ui/icons/Check';
 
 const useStyles = makeStyles((theme) => ({
     details: {
@@ -125,6 +126,7 @@ export default function Details() {
     const [ratingsFetched, setRatingsFetched] = useState(false)
     const [ratingValue, setRatingValue] = useState(0)
     const [seasonRatings, setSeasonRatings] = useState([])
+    const [hasBeenVoted, setHasbeenVoted] = useState(undefined)
 
     useEffect(() => {
         animeService
@@ -139,6 +141,16 @@ export default function Details() {
               setSeasonRatings(response)
           })
     }, [animeId]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        let rated = window.localStorage.getItem(anime.mal_id)
+        if (rated !== null) {
+            setHasbeenVoted(true)
+        }
+        if (rated === null) {
+            setHasbeenVoted(false)
+        }
+    }, [anime])
 
     useEffect(() => {
         animeService
@@ -185,6 +197,7 @@ export default function Details() {
             mal_id: anime.mal_id,
             rating: parseInt(ratingValue)
         }
+        window.localStorage.setItem(`${anime.mal_id}`, 'rated')
 
         if (!isNaN(toBeRated.rating)) {
             animeService
@@ -201,6 +214,7 @@ export default function Details() {
         setTimeout(() => {
             setShowRatingFeedback(false)
         }, 5000)
+        setHasbeenVoted(true)
     }
 
     return (
@@ -247,7 +261,7 @@ export default function Details() {
                         {' '}
                         ({anime.scored_by})
                         <br />
-                        {ratingsFetched === true ?
+                        {ratingsFetched === true && hasBeenVoted !== undefined ?
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <img
                                     className={classes.malLogo}
@@ -257,6 +271,7 @@ export default function Details() {
                                 />{' '}
                                 <Rating
                                     name="desktop-simple-controlled"
+                                    readOnly={!hasBeenVoted ? false : true}
                                     value={
                                         ratingCount > 0 ?
                                             ratingValue === 0 ?
@@ -270,10 +285,12 @@ export default function Details() {
                                                     0
                                         }
                                     onClick={handleRatingValueChange}
-                                    style={{ borderStyle: 'inset', borderWidth: '0.3rem', borderRadius: '0.6rem' }}
-                                /> <Button variant="contained" onClick={rateMobile} style={{ transform: 'scale(0.8)' }}>
+                                    style={!hasBeenVoted ? { borderStyle: 'inset', borderWidth: '0.3rem', borderRadius: '0.6rem' } : null}
+                                /> {!hasBeenVoted ? <div><Button variant="contained" onClick={rateMobile} style={{ transform: 'scale(0.8)' }}>
                                     Submit
-                                </Button> ({ratingCount})
+                                </Button> ({ratingCount})</div>
+                                :
+                                <div style={{ marginLeft: '0.5rem', display: 'flex', textAlign: 'center'}}> ({ratingCount})<CheckIcon style={{ marginLeft: '0.5rem' }} className={classes.malLogo}/></div>}
                             </div>
                                 :
                             <div>
@@ -351,7 +368,7 @@ export default function Details() {
                     />{' '}
                     ({anime.scored_by})
                     <br />
-                    {ratingsFetched === true ?
+                    {ratingsFetched === true && hasBeenVoted !== undefined ?
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <img
                                 className={classes.malLogo}
@@ -361,6 +378,7 @@ export default function Details() {
                             />{' '}
                             <Rating
                                 name="mobile-simple-controlled"
+                                readOnly={!hasBeenVoted ? false : true}
                                 value={
                                     ratingCount > 0 ?
                                         ratingValue === 0 ?
@@ -374,10 +392,12 @@ export default function Details() {
                                                 0
                                     }
                                 onClick={handleRatingValueChange}
-                                style={{ borderStyle: 'inset', borderWidth: '0.3rem', borderRadius: '0.6rem' }}
-                            /> <Button variant="contained" onClick={rateMobile} style={{ transform: 'scale(0.8)' }}>
+                                style={!hasBeenVoted ? {borderStyle: 'inset', borderWidth: '0.3rem', borderRadius: '0.6rem'} : null}
+                            /> {!hasBeenVoted ? <><Button variant="contained" onClick={rateMobile} style={{ transform: 'scale(0.8)' }}>
                                 Submit
-                            </Button> ({ratingCount})
+                            </Button> ({ratingCount})</>
+                            :
+                            <div style={{ marginLeft: '0.5rem', display: 'flex', textAlign: 'center'}}> ({ratingCount})<CheckIcon style={{ marginLeft: '0.5rem' }} className={classes.malLogo}/></div>}
                         </div>
                             :
                         <div>
