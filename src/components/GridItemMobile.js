@@ -9,6 +9,7 @@ import '../css/Grid.css';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { changeAnimeId } from '../reducers/animeIdReducer'
+import logo from '../images/MAL_logo.jpg'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,7 +32,11 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '100%',
       maxHeight: '100%',
     },
-  
+    malLogo: {
+      width: 20,
+      height: 20,
+      marginRight: '0.5rem',
+    }
 }));
 
 export default function GridItem(props) {
@@ -62,7 +67,7 @@ export default function GridItem(props) {
         <Grid container spacing={2}>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
+              <Grid item xs style={{ position: 'relative' }}>
                 <ButtonBase className={classes.image} style={{ float: 'left' }}>
                     <img className={classes.img} alt="complex" src={props.imgUrl} />
                 </ButtonBase>
@@ -77,9 +82,7 @@ export default function GridItem(props) {
                     style={{ fontSize: '1rem' }}
                 />  
                 </Typography>
-                <Typography gutterBottom variant="subtitle1" >
-                <div >Score: {props.score}</div>
-                </Typography>
+                <div style={{ display: 'flex', alignItems: 'center', position: 'absolute', bottom: '0.7rem' }}><img src={logo} alt="MAL-logo" className={classes.malLogo} /> Score: {props.score}</div>
                 </div>
               </Grid>
             </Grid>
