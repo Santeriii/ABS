@@ -10,6 +10,7 @@ import useWindowDimensions from '../tools/WindowDimensions';
 import { useDispatch } from 'react-redux'
 import { changeAnimeId } from '../reducers/animeIdReducer'
 import { Link } from 'react-router-dom'
+import logo from '../images/MAL_logo.jpg'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,7 +38,12 @@ const useStyles = makeStyles((theme) => ({
       display: '-webkit-box',
       '-webkit-line-clamp': '3', /* number of lines to show */
       '-webkit-box-orient': 'vertical',
-   }
+   },
+   malLogo: {
+     width: 25,
+     height: 25,
+     marginRight: '0.5rem',
+   },
 }));
 
 export default function GridItem(props) {
@@ -86,14 +92,7 @@ export default function GridItem(props) {
                 </Typography>
               </Grid>
               <Grid item style={{ fontSize: `${fontSize}rem` }}>
-                  <div style={{ float: 'right' }}>Score: {props.score}</div>
-                <Link
-                    style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline', fontSize: `${fontSize}rem`, float: 'left' }}
-                    onClick={() => setAnimeId(props.id)}
-                    to="/details"
-                >
-                  Details
-                </Link>
+                <div style={{ float: 'left', display: 'flex', alignItems: 'center' }}><img src={logo} alt="MAL-logo" className={classes.malLogo} /> Score: {props.score}</div>
               </Grid>
             </Grid>
             <Grid item>

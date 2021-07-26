@@ -70,13 +70,19 @@ export default function NestedGrid() {
       if (width > 2000) {
           return '21rem'
       }
+      if (width > 1800) {
+        return '17.5rem'
+      }
+      if (width > 1600) {
+        return '9rem'
+      }
       if (width > 1400) {
-          return '17.5rem'
+        return '7rem'
       }
       if (width > 1200) {
         return '6.5rem'
       }
-      return '4.5rem'
+      return '1rem'
   }
 
   function FormGrid() {
