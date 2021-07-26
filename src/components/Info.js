@@ -11,7 +11,8 @@ import useWindowDimensions from '../tools/WindowDimensions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router-dom';
 import GitHubIcon from '@material-ui/icons/GitHub';
-
+import logo from '../images/abs_logo-removebg-preview.png';
+import "../css/Nav.css";
 
 const useStyles = makeStyles((theme) => ({
     details: {
@@ -26,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     title: {
         fontSize: '1.5rem',
         color: 'red',
-        textAlign: 'center',
     },
     paper: {
       padding: theme.spacing(2),
@@ -103,8 +103,8 @@ export default function Info() {
                         <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <ArrowBackIcon className={classes.arrowBack_desktop} onClick={handleEnpoint}/>
-                            <Typography gutterBottom variant="subtitle1" className={classes.title} >
-                                Work in progress!!
+                            <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '13%', fontSize: '1.4rem' }} >
+                                <img src={logo} alt="ABS-logo" style={{ width: '17rem', marginBottom: '-1rem', marginTop: '2rem'}} />
                             </Typography>
                             <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '15%', fontSize: '1.4rem' }} >
                                 About
@@ -117,13 +117,9 @@ export default function Info() {
                                     Review System:
                                 </Typography>
                                 <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
-                                    The site's aim is to provide an anime reviewing system as simple as possible, which means it's not based on user registration or complicated scoring system; each series/movie has its' own 1-5 star rating, nothing else.
-                                </Typography><br />
-                                <Typography gutterBottom variant="subtitle1" style={{ fontSize: '1.1rem' }} >
-                                    To come:
-                                </Typography>
-                                <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
-                                    Thumbs up-/neutral-/thumbs down -feedback for each season of each series
+                                    The site's aim is to provide an anime reviewing system as simple as possible, which means it's not based on user registration or
+                                     complicated scoring system; each series/movie has its' own 1-5 star rating and each season a thumbs-up/-down voting, nothing else.
+                                     Anonymous user may rate each series/movie once, same goes for rating seasons.
                                 </Typography>
                                 <Typography gutterBottom variant="subtitle1" style={{ marginTop: '2rem', marginBottom: '1rem', fontSize: '1.1rem' }} >
                                     <GitHubIcon style={{ marginRight: '1.3rem', transform: 'scale(1.3)' }}/>Santeriii
@@ -142,27 +138,23 @@ export default function Info() {
                         <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <ArrowBackIcon className={classes.arrowBack} onClick={handleEnpoint}/>
-                            <Typography gutterBottom variant="subtitle1" className={classes.title} >
-                                Work in progress!!
+                            <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '3%', marginTop: '1rem', marginBottom: '-0.5rem' }} >
+                                <img src={logo} alt="ABS-logo" style={{ width: '17rem' }}/>
                             </Typography>
-                            <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '7.5%', fontSize: '1.4rem' }} >
+                            <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '5%', fontSize: '1.4rem', marginBottom: '0.5rem' }} >
                                 About
                             </Typography>
-                            <div style={{ width: '85%', marginLeft: '7.5%' }}>
-                                <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
+                            <div style={{ width: '95%', marginLeft: '5%' }}>
+                                <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey', marginBottom: '0.7rem' }}>
                                     Welcome to AnimeBySeason, a quick and easy-to-use rating app for a vast anime collection provided by MyAnimeList. No signing, nothing futile.
                                 </Typography>
                                 <Typography gutterBottom variant="subtitle1" style={{ fontSize: '1.1rem' }} >
                                     Review System:
                                 </Typography>
                                 <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
-                                    The site's aim is to provide an anime reviewing system as simple as possible, which means it's not based on user registration or complicated scoring system; each series/movie has its' own 1-5 star rating, nothing else.
-                                </Typography>
-                                <Typography gutterBottom variant="subtitle1" style={{ fontSize: '1.1rem' }} >
-                                    To come:
-                                </Typography>
-                                <Typography gutterBottom variant="subtitle1" className={classes.summary} style={{ color: 'grey'}}>
-                                    Thumbs up-/neutral-/thumbs down -feedback for each season of each series
+                                    The site's aim is to provide an anime reviewing system as simple as possible, which means it's not based on user registration or
+                                     complicated scoring system; each series/movie has its' own 1-5 star rating and each season a thumbs-up/-down voting, nothing else.
+                                     Anonymous user may rate each series/movie once, same goes for rating seasons.
                                 </Typography>
                                 <Typography gutterBottom variant="subtitle1" style={{ marginTop: '1.7rem', marginBottom: '1rem', fontSize: '1.1rem' }} >
                                     <GitHubIcon style={{ marginRight: '1rem', transform: 'scale(1.3)' }}/>Santeriii
